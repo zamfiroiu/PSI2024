@@ -1,4 +1,5 @@
 //#include<iostream>
+//#include<algorithm>
 //
 //using namespace std;
 //
@@ -10,10 +11,16 @@
 //	return a * b;
 //}
 //
+//void afisareCalcul(int a, int b, int(*pf)(int x, int y)) {
+//	cout << pf(a, b)<<endl;
+//}
+//
 //void main() {
 //	int(*pf)(int x, int y);
 //
-//	pf = inmultire;
-//
-//	cout << pf(7, 8);
+//	const int a = 89;
+//	
+//	afisareCalcul(5, 8, suma);
+//	afisareCalcul(7, 3, inmultire);
+//	afisareCalcul(5, 4, suma);
 //}

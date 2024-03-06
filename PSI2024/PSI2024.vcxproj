@@ -127,6 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CodSursa4Martie.cpp" />
+    <ClCompile Include="Functii.h" />
+    <ClCompile Include="M3_1_1_DefinireSimboluri.cpp" />
+    <ClCompile Include="M3_1_2_Macrodefinitii.cpp" />
+    <ClCompile Include="M3_1_3_Enumerare.cpp" />
+    <ClCompile Include="M3_1_4_TipuriDeDate.cpp" />
+    <ClCompile Include="M3_2_1_UtilizarePointeri.cpp" />
+    <ClCompile Include="M3_2_2_PointerLaPointer.cpp" />
+    <ClCompile Include="M3_2_3_AritmeticaPointerilor.cpp" />
+    <ClCompile Include="M3_2_4_PointerLaFunctii.cpp" />
+    <ClCompile Include="M3_2_5_Referinte.cpp" />
+    <ClCompile Include="M3_2_6_Polimorfism.cpp" />
+    <ClCompile Include="M3_2_7_TransferParametri.cpp" />
+    <ClCompile Include="M3_3_1_DefinireClasa.cpp" />
+    <ClCompile Include="M3_3_2_ClasaLaptop.cpp" />
+    <ClCompile Include="M3_4_1_ShallowCopy.cpp" />
+    <ClCompile Include="M3_4_2_ClasaLaptop.cpp" />
     <ClCompile Include="PrimulCod.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

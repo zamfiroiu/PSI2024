@@ -5,6 +5,8 @@ using namespace std;
 class Pix{
 public:
 	static int TVA;
+	static int contor;
+	const int id;
 	string producator;
 	char *culoare;
 	int greutate;
@@ -16,30 +18,84 @@ public:
 		//-> realizeaza Dereferentiere + accesare
 		this->greutate += greutate;
 	}
+
+	Pix():id(contor++) {
+		this->producator = "Pelikan";
+		this->culoare = NULL;
+		this->greutate = 20;
+		this->pret = 10;
+		this->lungime = 18;
+	}
+
+	~Pix() {
+		if (this->culoare != NULL) {
+			delete[]this->culoare;
+		}
+	}
+
+	Pix(string producator, const char* culoare, int greutate, float pret, int lungime):id(contor++) {
+		this->producator = producator;
+		this->culoare = new char[strlen(culoare)+1];
+		strcpy_s(this->culoare, strlen(culoare) + 1, culoare);
+		this->greutate = greutate;
+		this->pret = pret;
+		this->lungime = lungime;
+	}
+
+	Pix(const char* culoare):id(contor++) {
+		this->producator = "Pelikan";
+		this->culoare = new char[strlen(culoare) + 1];
+		strcpy_s(this->culoare, strlen(culoare) + 1, culoare);
+		this->greutate = 20;
+		this->pret = 10;
+		this->lungime = 18;
+	}
+
+	Pix(const Pix& pix):id(contor++) {
+		this->producator = pix.producator;
+		this->culoare = new char[strlen(pix.culoare) + 1];
+		strcpy_s(this->culoare, strlen(pix.culoare) + 1, pix.culoare);
+		this->greutate = pix.greutate;
+		this->pret = pix.pret;
+		this->lungime = pix.lungime;
+	}
 };
 int Pix::TVA = 19;
+int Pix::contor = 1;
 
-int f(int a) {
 
+Pix f2() {
+	Pix pix;
+	return pix;
+}
+
+void f1(Pix p) {
+	Pix pix= f2();
 }
 int main() {
-	cout << Pix::TVA << endl;
 	Pix pix1;
-	Pix pix2;
-	pix1.cresteGreutate(7);
+	cout << pix1.greutate;
 
-	pix2.TVA = 11;
-	cout << pix1.greutate << endl;
-	pix1.greutate = 20;
-	cout << pix1.greutate << endl;
-	pix1.pret = 10;
+	{
 
-	pix2.greutate = 60;
-	pix2.pret = 5;
+		Pix pix2("Rosu");
+	}
 
-	cout << pix1.TVA << endl;
 	
+	Pix pix3("Pelikan", "Verde", 43, 25, 23);
 
+	Pix pix4(pix3);
+
+	strcpy_s(pix4.culoare, strlen("Negru") + 1, "Negru");
+
+	cout << "Culoare: " << pix3.culoare;
+
+
+	Pix* pPix;
+
+	pPix= new Pix("Galben");
+
+	delete pPix;
 
 	return 0;
 }

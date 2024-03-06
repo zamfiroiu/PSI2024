@@ -10,6 +10,7 @@
 //	intreg2++;
 //	cout << intreg << endl;
 //
+//	
 //	int& rIntreg = intreg;//rIntreg=A1;
 //	rIntreg++;//
 //	//int & r;
@@ -17,4 +18,5 @@
 //
 //	int* pIntreg = &intreg;
 //	(*pIntreg)++;
+//	cout << intreg << endl;
 //}

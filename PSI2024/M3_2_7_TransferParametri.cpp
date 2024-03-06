@@ -8,6 +8,7 @@
 //	b = aux;
 //}
 //
+//
 //void interschimbare2(int* a, int* b) {
 //	int aux = *a;
 //	*a = *b;
@@ -20,15 +21,23 @@
 //	b = aux;
 //}
 //
+//void citireStrada(char* strada) {
+//	cin >> strada;
+//}
 //
 //void main() {
 //
-//	int x = 10;
-//	int y = 20;
+//	char strada[100];
+//	citireStrada(strada);
 //
-//	cout << x << " " << y << endl;
+//	cout << strada;
 //
-//	interschimbare3(x, y);
+//	//int x = 10;
+//	//int y = 20;
 //
-//	cout << x << " " << y << endl;
+//	//cout << x << " " << y << endl; // 10 20
+//
+//	//interschimbare3(x, y);
+//
+//	//cout << x << " " << y << endl; // 10 20
 //}
