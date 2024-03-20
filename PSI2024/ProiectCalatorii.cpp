@@ -2,6 +2,12 @@
 
 using namespace std;
 
+//operator de comparatie
+//operator++ sau --
+//operator << si >>
+//operator de cast - de conversie
+//operator functie
+
 class Tara {
 private:
 	const int idTara;
@@ -10,6 +16,41 @@ private:
 	float suprafata;
 	static int contor;
 public:
+
+	bool operator>(Tara tara) {
+		if (this->suprafata != 0 && tara.suprafata != 0) {
+			float densitateTara1 = this->populatie / this->suprafata;
+			float densitateTara2 = tara.populatie / tara.suprafata;
+			return densitateTara1 > densitateTara2;
+		}
+		return false;
+	}
+
+	Tara operator++() {
+		this->populatie += 1;
+		return *this;
+	}
+
+	Tara operator++(int param) {
+		Tara initial = *this; //constructor de copiere
+		this->populatie += 1;
+		return initial;
+	}
+
+	friend ostream& operator<<(ostream& monitor, Tara tara){
+		monitor << tara.idTara << "." << tara.nume << " are " << tara.populatie
+			<< " de locuitori si o suprafata de "
+			<< tara.suprafata << " km2." << endl;
+		return monitor;
+	}
+
+	Tara(const Tara& tara):idTara(contor++) {
+		this->nume = tara.nume;
+		this->populatie = tara.populatie;
+		this->suprafata = tara.suprafata;
+	}
+
+
 	Tara() :idTara(contor++) {
 		this->nume = "N/A";
 		this->populatie = 0;
@@ -76,6 +117,62 @@ public:
 	string nume;
 	int nrTari;
 	Tara* vectorTari;
+
+	string operator()() {
+		return concatenareNumeTari();
+	}
+
+	explicit operator int() {
+		return calculeazaPopulatieTotala();
+	}
+
+	explicit operator float() {
+		return calculeazaSuprafataTotala();
+	}
+
+	Continent operator+=(Tara tara) {
+		Tara* vector = new Tara[this->nrTari + 1];
+		for (int i = 0; i < this->nrTari; i++) {
+			vector[i] = this->vectorTari[i];
+		}
+		vector[this->nrTari] = tara;
+		if (this->vectorTari != NULL) {
+			delete[]this->vectorTari;
+		}
+		this->vectorTari = vector;
+		this->nrTari++;
+		return *this;
+	}
+
+private:
+	string concatenareNumeTari() {
+		string rezultat = this->nume;
+		rezultat += " (";
+		for (int i = 0; i < this->nrTari-1; i++) {
+			rezultat += this->vectorTari[i].getNume();
+			rezultat += ", ";
+		}
+		rezultat += this->vectorTari[this->nrTari-1].getNume();
+		rezultat += ").";
+		return rezultat;
+	}
+
+	float calculeazaSuprafataTotala() {
+		float suma = 0;
+		for (int i = 0; i < this->nrTari; i++) {
+			suma += vectorTari[i].getSuprafata();
+		}
+		return suma;
+	}
+
+	int calculeazaPopulatieTotala() {
+		int suma = 0;
+		for (int i = 0; i < this->nrTari; i++) {
+			suma += vectorTari[i].getPopulatie();
+		}
+		return suma;
+	}
+public:
 	Continent() {
 		this->nume = "N/A";
 		this->nrTari = 0;
@@ -98,6 +195,30 @@ public:
 		for (int i = 0; i < nrTari; i++) {
 			this->vectorTari[i] = vector[i];
 		}
+	}
+
+	Continent(const Continent& c) {
+		this->nume = c.nume;
+		this->nrTari = c.nrTari;
+		this->vectorTari = new Tara[c.nrTari];
+		for (int i = 0; i < c.nrTari; i++) {
+			this->vectorTari[i] = c.vectorTari[i];
+		}
+	}
+
+	Continent operator=(const Continent& c) {
+		if (this != &c) {
+			this->nume = c.nume;
+			this->nrTari = c.nrTari;
+			if (this->vectorTari != NULL) {
+				delete[]this->vectorTari;
+			}
+			this->vectorTari = new Tara[this->nrTari];
+			for (int i = 0; i < this->nrTari; i++) {
+				this->vectorTari[i] = c.vectorTari[i];
+			}
+		}
+		return *this;
 	}
 
 	void afisare() {
@@ -161,6 +282,34 @@ public:
 	int oraIncepere;
 	bool trebuieEchipament;
 
+	friend ostream& operator<<(ostream& out, const Activitate& a) {
+		out << "Activitatea " << a.denumire << " dureaza " << a.durata
+			<< " minute, incepe la ora " << a.oraIncepere << ". ";
+		out << (a.trebuieEchipament == true
+			? "Avem nevoie de echipament"
+			: "Nu necesita un echipament anume");
+		out << endl;
+		return out;
+	}
+
+	friend istream& operator>>(istream& tastatura, Activitate& a) {
+		cout << "Denumirea activitatii:";
+		tastatura >> a.denumire;
+		cout << "Durata activitatii (minute):";
+		tastatura >> a.durata;
+		cout << "Ora inceperii activitatii:";
+		tastatura >> a.oraIncepere;
+		cout << "Trebuie echipament (1-DA, 0-NU)";
+		tastatura >> a.trebuieEchipament;
+		return tastatura;
+	}
+
+	Activitate operator+=(int timpSuplimentar) {
+		this->durata += timpSuplimentar;
+		return *this;
+	}
+
+
 	Activitate() {
 		this->denumire = "N/A";
 		this->durata = 0;
@@ -210,10 +359,24 @@ void main() {
 	Tara tara3("TaraNoua");
 	Tara* pTara = new Tara("Romania", 1800, 230);
 
-	tara1.afisare();
-	tara2.afisare();
-	tara3.afisare();
-	pTara->afisare();
+	if (tara1 > tara2) {
+		cout << tara1.getNume() << " are densitatea mai mare."<<endl;
+	}
+	else {
+		cout << tara2.getNume() << " are densitatea mai mare."<<endl;
+	}
+
+	tara2 = ++tara1;
+	tara2 = tara1++;
+
+	//tara1.afisare();
+
+	cout << tara1<<tara2<<tara3<<endl;
+	
+
+	//tara2.afisare();
+	//tara3.afisare();
+	//pTara->afisare();
 
 	Continent continent1;
 	Tara* vector = new Tara[3]{ tara1,tara2,tara3 };
@@ -238,6 +401,20 @@ void main() {
 
 	continent2.afisare();
 
+	int populatieTotala = (int)americaDeSud;
+	float suprafataTotala = (float)americaDeSud;
+	cout << (float)americaDeSud;
+	cout << endl << endl << "Populatia completa: " << populatieTotala << endl;
+
+	cout << americaDeSud()<<endl; //"America de sud (Columbia, Brazilia, Argentina)"
+
+	Tara taraNoua("Brazilia", 3000, 3000);
+	americaDeSud += taraNoua;
+
+	cout << americaDeSud();
+	americaDeSud.afisare();
+
+
 	//Activitati
 	cout << "\n\nActivitati: " << endl;
 	Activitate activitate1;
@@ -248,6 +425,12 @@ void main() {
 	activitateDeInot.afisare();
 	activitateDeMers.afisare();
 
+	
+	cin >> activitate1;
+	cout << activitate1<<endl;
+
+	activitate1 += 10;
+	cout << activitate1 << endl;
 
 	delete pTara;
 }
