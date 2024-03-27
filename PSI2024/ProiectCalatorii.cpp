@@ -108,6 +108,10 @@ public:
 			<< this->suprafata << " km2." << endl;
 	}
 
+	~Tara() {
+
+	}
+
 };
 int Tara::contor = 1;
 
@@ -276,12 +280,13 @@ public:
 };
 
 class Activitate {
-public:
+protected:
 	string denumire;
 	int durata;//minute
 	int oraIncepere;
 	bool trebuieEchipament;
 
+public:
 	friend ostream& operator<<(ostream& out, const Activitate& a) {
 		out << "Activitatea " << a.denumire << " dureaza " << a.durata
 			<< " minute, incepe la ora " << a.oraIncepere << ". ";
@@ -331,6 +336,10 @@ public:
 		this->trebuieEchipament = trebuieEchipament;
 	}
 
+	~Activitate() {
+
+	}
+
 	void afisare() {
 		cout << "Activitatea " << this->denumire << " dureaza " << this->durata
 			<< " minute, incepe la ora " << this->oraIncepere << ". ";
@@ -349,88 +358,176 @@ public:
 	}
 };
 
+enum MijlocTransport {
+	Tren,
+	Masina,
+	Avion,
+	Autobuz
+};
+
+string getStringMijlocTransport(MijlocTransport transport) {
+	if (transport == Tren) {
+		return "Tren";
+	}
+	if (transport == Masina) {
+		return "Masina";
+	}
+	if (transport == Avion) {
+		return "Avion";
+	}
+	if (transport == Autobuz) {
+		return "Autobuz";
+	}
+	return "";
+}
+
+class Calatorie : public Activitate {
+private:
+	Tara destinatie;
+	int nrZile;
+	MijlocTransport mijlocTransport;
+public:
+	Calatorie() :Activitate("Vacanta",2000,false) {
+		this->nrZile = 3;
+		this->mijlocTransport = Avion;
+	}
+	Calatorie(Tara destinatie, int nrZile, MijlocTransport transport) :Activitate("Vacanta", 2000, false) {
+		this->destinatie = destinatie;
+		this->nrZile = nrZile;
+		this->mijlocTransport = transport;
+	}
+	Calatorie(Tara destinatie, int nrZile, MijlocTransport transport,
+		string nume, int durata, int oraPlecare, bool echipament)
+		:Activitate(nume, durata, oraPlecare, echipament) 
+	{		
+		this->destinatie = destinatie;
+		this->nrZile = nrZile;
+		this->mijlocTransport = transport;
+	}
+
+	~Calatorie() {
+		//pus doar ca sa avm cele trei elemente specifice 
+		//claselor cu campuri alocate dinamic
+	}
+
+	Calatorie(const Calatorie& calatorie):Activitate(calatorie) {
+		this->destinatie = calatorie.destinatie;
+		this->nrZile = calatorie.nrZile;
+		this->mijlocTransport = calatorie.mijlocTransport;
+	}
+
+	Calatorie operator=(const Calatorie& calatorie) {
+		if (this != &calatorie) {
+			Activitate::operator=(calatorie);
+			this->destinatie = calatorie.destinatie;
+			this->nrZile = calatorie.nrZile;
+			this->mijlocTransport = calatorie.mijlocTransport;
+		}
+		return *this;
+	}
+
+	void calculeazaDurataCalatorie() {
+		float durata = 60 * 24 * this->nrZile;
+		this->durata = durata;
+	}
+
+	friend ostream& operator<<(ostream& monitor, const Calatorie& calatorie) {
+		monitor << (Activitate)calatorie;
+		monitor << "Destinatie: " << calatorie.destinatie<<endl;
+		monitor << "Numar zile:" << calatorie.nrZile << endl;
+		monitor << "Mijloc transport:" << getStringMijlocTransport(calatorie.mijlocTransport) << endl;
+		return monitor;
+	}
+
+};
+
 void main() {
 
-	Tara tara1;
-	tara1.setNume("Japonia");
-	tara1.setPopulatie(8000);
-	tara1.setSuprafata(100);
-	Tara tara2("Zanzibar", 1000, 200);
-	Tara tara3("TaraNoua");
-	Tara* pTara = new Tara("Romania", 1800, 230);
+	//Tara tara1;
+	//tara1.setNume("Japonia");
+	//tara1.setPopulatie(8000);
+	//tara1.setSuprafata(100);
+	//Tara tara2("Zanzibar", 1000, 200);
+	//Tara tara3("TaraNoua");
+	//Tara* pTara = new Tara("Romania", 1800, 230);
 
-	if (tara1 > tara2) {
-		cout << tara1.getNume() << " are densitatea mai mare."<<endl;
-	}
-	else {
-		cout << tara2.getNume() << " are densitatea mai mare."<<endl;
-	}
+	//if (tara1 > tara2) {
+	//	cout << tara1.getNume() << " are densitatea mai mare."<<endl;
+	//}
+	//else {
+	//	cout << tara2.getNume() << " are densitatea mai mare."<<endl;
+	//}
 
-	tara2 = ++tara1;
-	tara2 = tara1++;
+	//tara2 = ++tara1;
+	//tara2 = tara1++;
 
-	//tara1.afisare();
+	////tara1.afisare();
 
-	cout << tara1<<tara2<<tara3<<endl;
-	
+	//cout << tara1<<tara2<<tara3<<endl;
+	//
 
-	//tara2.afisare();
-	//tara3.afisare();
-	//pTara->afisare();
+	////tara2.afisare();
+	////tara3.afisare();
+	////pTara->afisare();
 
-	Continent continent1;
-	Tara* vector = new Tara[3]{ tara1,tara2,tara3 };
-	Continent americaDeSud("America de Sud", 3, vector);
-	
-	Tara* vector2 = new Tara[2]{ tara2,tara1};
-	Continent continent2(2, vector2);
-	delete []vector2;
-	
-	continent1.afisare();
-	americaDeSud.afisare();
-	continent2.afisare();
+	//Continent continent1;
+	//Tara* vector = new Tara[3]{ tara1,tara2,tara3 };
+	//Continent americaDeSud("America de Sud", 3, vector);
+	//
+	//Tara* vector2 = new Tara[2]{ tara2,tara1};
+	//Continent continent2(2, vector2);
+	//delete []vector2;
+	//
+	//continent1.afisare();
+	//americaDeSud.afisare();
+	//continent2.afisare();
 
-	continent2.setNume("Asia");
-	continent2.setTari(3, vector);
-	delete[]vector;
-	continent2.afisare();
+	//continent2.setNume("Asia");
+	//continent2.setTari(3, vector);
+	//delete[]vector;
+	//continent2.afisare();
 
-	continent2.getTari()[1].afisare();
-	continent2.getTaraDePePozitie(1).afisare();
-	continent2.getTaraDePePozitie(1).setNume("Myanmar");
+	//continent2.getTari()[1].afisare();
+	//continent2.getTaraDePePozitie(1).afisare();
+	//continent2.getTaraDePePozitie(1).setNume("Myanmar");
 
-	continent2.afisare();
+	//continent2.afisare();
 
-	int populatieTotala = (int)americaDeSud;
-	float suprafataTotala = (float)americaDeSud;
-	cout << (float)americaDeSud;
-	cout << endl << endl << "Populatia completa: " << populatieTotala << endl;
+	//int populatieTotala = (int)americaDeSud;
+	//float suprafataTotala = (float)americaDeSud;
+	//cout << (float)americaDeSud;
+	//cout << endl << endl << "Populatia completa: " << populatieTotala << endl;
 
-	cout << americaDeSud()<<endl; //"America de sud (Columbia, Brazilia, Argentina)"
+	//cout << americaDeSud()<<endl; //"America de sud (Columbia, Brazilia, Argentina)"
 
-	Tara taraNoua("Brazilia", 3000, 3000);
-	americaDeSud += taraNoua;
+	//Tara taraNoua("Brazilia", 3000, 3000);
+	//americaDeSud += taraNoua;
 
-	cout << americaDeSud();
-	americaDeSud.afisare();
+	//cout << americaDeSud();
+	//americaDeSud.afisare();
 
 
-	//Activitati
-	cout << "\n\nActivitati: " << endl;
-	Activitate activitate1;
-	Activitate activitateDeInot("Inot", 30, 17, true);
-	Activitate activitateDeMers("Plimbare", 60, false);
+	////Activitati
+	//cout << "\n\nActivitati: " << endl;
+	//Activitate activitate1;
+	//Activitate activitateDeInot("Inot", 30, 17, true);
+	//Activitate activitateDeMers("Plimbare", 60, false);
 
-	activitate1.afisare();
-	activitateDeInot.afisare();
-	activitateDeMers.afisare();
+	//activitate1.afisare();
+	//activitateDeInot.afisare();
+	//activitateDeMers.afisare();
 
-	
-	cin >> activitate1;
-	cout << activitate1<<endl;
+	//
+	//cin >> activitate1;
+	//cout << activitate1<<endl;
 
-	activitate1 += 10;
-	cout << activitate1 << endl;
+	//activitate1 += 10;
+	//cout << activitate1 << endl;
 
-	delete pTara;
+	//delete pTara;
+
+	Tara italia("Italia", 3000, 300);
+	Calatorie calatorie(italia, 3, Avion, "City break", 120, 17, false);
+	calatorie.calculeazaDurataCalatorie();
+	cout << calatorie;
 }
