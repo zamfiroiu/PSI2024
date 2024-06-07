@@ -8,13 +8,13 @@
 //	b = aux;
 //}
 //
-//
+////
 //void interschimbare2(int* a, int* b) {
 //	int aux = *a;
 //	*a = *b;
 //	*b = aux;
 //}
-//
+////
 //void interschimbare3(int& a, int& b) {
 //	int aux = a;
 //	a = b;
@@ -27,17 +27,17 @@
 //
 //void main() {
 //
-//	char strada[100];
-//	citireStrada(strada);
+//	//char strada[100];
+//	//citireStrada(strada);
 //
-//	cout << strada;
+//	//cout << strada;
 //
-//	//int x = 10;
-//	//int y = 20;
+//	int x = 10;
+//	int y = 20;
 //
-//	//cout << x << " " << y << endl; // 10 20
+//	cout << x << " " << y << endl; // 10 20
 //
-//	//interschimbare3(x, y);
+//	interschimbare3(x, y);
 //
-//	//cout << x << " " << y << endl; // 10 20
+//	cout << x << " " << y << endl; // 10 20
 //}

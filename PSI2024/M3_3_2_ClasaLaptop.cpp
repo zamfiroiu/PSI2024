@@ -51,7 +51,9 @@
 //	}
 //
 //	~Laptop() {
-//		//dezalocari din HEAP
+//		if (this->nrApasariTasta) {
+//			delete[]this->nrApasariTasta;
+//		}
 //	}
 //
 //	int getNrTaste() {
@@ -157,9 +159,10 @@
 //	////Laptop l1(20, 13, true);
 //	////Laptop l2(10, 15, false);
 //
-//	//cout << Laptop::cateLaptopuri();
+//	cout << Laptop::cateLaptopuri();
 //
 //	Laptop l;
+//	cout << l.cateLaptopuri();
 //	l.seNrApasariTasta(new int[4]{ 10,2,5,7 }, 4);
 //	cout<<l.getNrApasariTasta()[3];
 //}

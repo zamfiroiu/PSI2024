@@ -1,57 +1,112 @@
 //#include<iostream>
 //using namespace std;
 //
-//class NumeClasa {
-//public:
-//	static int contor;
+//class Pix {
+//private:
 //	const int id;
-//	int atribut1;
-//	float atribut2;
-//	void metoda1() {//metoda1(NumeClasa *this)
-//		cout << this->atribut1;
-//		//(*this).atribut1;
-//	};
-//	NumeClasa() :id(10) {
+//	bool cuCapac;
+//	string culoare;
 //
-//		this->atribut1 = 5;
-//		this->atribut2 = 7;
+//public:
+//	Pix():id(6) {		
+//		this->culoare = "albastru";
+//		this->cuCapac = true;
+//	}
+//	Pix(int idNou, bool cuCapac, string culoare):id(idNou) {
+//		this->cuCapac = cuCapac;
+//		this->culoare = culoare;
+//	}
+//	Pix(bool cuCapac, string culoare) :id(1) {
+//		this->cuCapac = cuCapac;
+//		this->culoare = culoare;
+//	}
+//	//de discutat vineri de ce trebuie referinta
+//	Pix(const Pix& original): id(original.id) {
+//		this->cuCapac = original.cuCapac;
+//		this->culoare = original.culoare;
+//	}
+//	~Pix() {
+//		
 //	}
 //
-//	NumeClasa(int p1, int p2) :atribut1(p1), atribut2(p2), id(10) {
-//		//this->atribut1 = p1;
+//	void setCuloare(string culoare) {
+//		if (culoare.length() > 2) {
+//			this->culoare = culoare;
+//		}
 //	}
 //
-//	~NumeClasa() {
-//		//destructor
+//	string getCuloare(){
+//		return this->culoare;
 //	}
-//	//void metoda2(int a); //metoda2(NumeClasa* this, int a)
+//
+//	int getId() {
+//		return this->id;
+//	}
+//
+//	void setCuCapac(bool valoare) {
+//		this->cuCapac = valoare;
+//	}
+//
+//	bool hasCapac() {
+//		return this->cuCapac;
+//	}
+//
+//
+//
+//
+//	void scoateCapac() { //void scoateCapac(Pix* this)
+//		//operatorul -> realizeaza doua operatii: dereferntiere+ accesare
+//		if (this->cuCapac == true) {
+//			this->cuCapac = false;
+//		}
+//	}
 //};
-//int NumeClasa::contor = 0;
 //
-//void functie() {
-//	cout << "Functie;";
+//Pix functie(Pix pixParam) {
+//	int variabila = 90;
+//	Pix pixNou(false, "Verde");
+//	return pixNou;
 //}
+//
+//
+//
 //
 //void main() {
 //
-//	//NumeClasa obiect1;
-//	//obiect1.atribut1 = 1;
+//	//Pix obiect;
+//	//obiect.culoare="albastru";
+//	//obiect.cuCapac = true;
 //
-//	//NumeClasa obiect2;
-//	//obiect2.atribut1 = 2;
-//
-//	//obiect2.metoda1();
-//
-//	//NumeClasa o1;
-//	//o1.metoda1();
-//
-//	NumeClasa ob2;
-//	//NumeClasa ob3(12, 14);
-//
-//	NumeClasa* p = new NumeClasa(12, 14);
+//	//cout << obiect.cuCapac<<endl;
+//	//obiect.scoateCapac();
+//	//cout << obiect.cuCapac;
 //
 //
-//	delete p;
+//	//Pix pix1;
+//	//pix1.cuCapac = true;
+//
+//	Pix pix2(true,"Verde");
+//
+//	//pix1.scoateCapac();
+//	//
+//	Pix pix3 = pix2;
+//	Pix pix4(pix2);
 //
 //
+//	//Pix pix5;
+//
+//	//{
+//	//	Pix pix6;
+//	//}
+//
+//	Pix pix7(5, false, "Albastru");
+//	pix7.setCuloare("Rosu");
+//
+//	cout << "Pixul scrie cu culoarea " << pix7.getCuloare()<<" si "
+//		<<(pix7.hasCapac()?"are capac.":"nu are capac.") << endl;
+//
+//
+//	Pix pix8=functie(pix7);
+//
+//	cout << pix8.getCuloare();
 //}

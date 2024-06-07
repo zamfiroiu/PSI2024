@@ -16,7 +16,7 @@
 //	//int & r;
 //	cout << intreg<<endl;
 //
-//	int* pIntreg = &intreg;
-//	(*pIntreg)++;
-//	cout << intreg << endl;
+//	//int* pIntreg = &intreg;
+//	//(*pIntreg)++;
+//	//cout << intreg << endl;
 //}

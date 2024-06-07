@@ -7,6 +7,10 @@
 //	virtual void metoda() = 0;
 //	virtual void metoda2() = 0;
 //
+//	virtual int functie() {
+//		return 0;
+//	}
+//
 //	Baza& operator=(const Baza& b) {
 //
 //	}

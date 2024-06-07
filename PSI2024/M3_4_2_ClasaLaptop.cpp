@@ -14,25 +14,25 @@
 //
 //public:
 //
-//	int getID() {
+//	int getID()const {
 //		return this->id;
 //	}
-//	int getRAM() {
+//	int getRAM()const {//int getRam(const Laptop* this)
 //		return this->RAM;
 //	}
-//	string getTipCPU() {
+//	string getTipCPU()const {
 //		return tipCPU;
 //	}
-//	float getRezolutieEcran() {
+//	float getRezolutieEcran()const {
 //		return rezolutieEcran;
 //	}
-//	bool hasCameraWeb() {
+//	bool hasCameraWeb()const {
 //		return cameraWeb;
 //	}
 //
-//	void setRAM(int RAM) {
+//	void setRAM(const int param) {
 //		if (RAM > 0) {
-//			this->RAM = RAM;
+//			this->RAM= param ;
 //		}
 //	}
 //
@@ -157,15 +157,7 @@
 //		return nrLaptopuri;
 //	}
 //
-//	void f(Laptop * l) {
-//
-//	}
-//	
-//
 //	void modificaTipCPU(string newTipCPU);
-//
-//
-//
 //};
 //
 //void Laptop::modificaTipCPU(string newTipCPU) {
@@ -175,8 +167,15 @@
 //int Laptop::nrLaptopuri = 0;
 //
 //void main() {
-//	//Laptop laptop;
 //
+//	Laptop laptop;
+//	laptop.setRAM(16);
+//	cout << laptop.getRAM() << endl;
+//	laptop.setRAM(4);
+//	cout << laptop.getRAM() << endl;
+//
+//	cout<<laptop.cateLaptopuriAvem()<<endl;
+//	cout << Laptop::cateLaptopuriAvem() << endl;
 //
 //	//{
 //	//	Laptop l;
@@ -194,14 +193,13 @@
 //	//l.seNrApasariTasta(new int[4]{ 10,2,5,7 }, 4);
 //	//cout<<l.getNrApasariTasta()[3];
 //
-//	Laptop l;
-//	cout << l.getRAM();
+//	//Laptop l;
+//	//cout << l.getRAM();
 //
-//	cout << endl << Laptop::cateLaptopuriAvem();
-//	cout << endl << l.cateLaptopuriAvem();
+//	//cout << endl << Laptop::cateLaptopuriAvem();
+//	//cout << endl << l.cateLaptopuriAvem();
 //
-//	Laptop laptop1(1, 12, "AMD", 15, true, 3, new int[3]{ 3,4,2 });
-//	Laptop laptopulPrietenului(laptop1);
-//	Laptop laptop2 = laptop1;
+//	//Laptop laptop1(1, 12, "AMD", 15, true, 3, new int[3]{ 3,4,2 });
+//	//Laptop laptopulPrietenului(laptop1);
+//	//Laptop laptop2 = laptop1;
 //}
-//

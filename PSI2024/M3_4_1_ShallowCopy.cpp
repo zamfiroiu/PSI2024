@@ -1,23 +1,24 @@
+//#define _CRT_SECURE_NO_WARNINGS
 //#include<iostream>
 //
 //using namespace std;
 //
 //class Clasa {
-//public:
+//private:
 //	char* pointer;
 //	int atribut;
+//public:
+//	//const Clasa& operator=(const Clasa& c) {
+//	//	if (this->pointer != NULL)
+//	//	{
+//	//		delete[]this->pointer;
+//	//	}
 //
-//	const Clasa& operator=(const Clasa& c) {
-//		if (this->pointer != NULL)
-//		{
-//			delete[]this->pointer;
-//		}
-//
-//		this->pointer = new char[strlen(c.pointer) + 1];
-//		strcpy(this->pointer, c.pointer);
-//		this->atribut = c.atribut;
-//		return *this;
-//	}
+//	//	this->pointer = new char[strlen(c.pointer) + 1];
+//	//	strcpy(this->pointer, c.pointer);
+//	//	this->atribut = c.atribut;
+//	//	return *this;
+//	//}
 //
 //	Clasa(const Clasa& c) {
 //		this->pointer = new char[strlen(c.pointer) + 1];
@@ -26,38 +27,63 @@
 //	}
 //
 //	Clasa() {
-//		this->pointer = NULL;
+//		this->pointer = new char[strlen("Text salvat")+1];
+//		strcpy(this->pointer, "Text salvat");
+//		this->atribut = 12;
 //	}
 //
-//	void metoda(Clasa c) {
-//
+//	Clasa& operator=(const Clasa& sursa) {
+//		if (this == &sursa) {//verificare de autoasiganre
+//			return *this;
+//		}
+//	
+//		this->atribut = sursa.atribut;
+//		if (this->pointer != NULL) {
+//			delete[]this->pointer;
+//		}
+//		this->pointer = new char[strlen(sursa.pointer) + 1];
+//		strcpy_s(this->pointer, strlen(sursa.pointer) + 1, sursa.pointer);
+//		
+//		return *this;
 //	}
 //
-//	Clasa metoda2() {
-//		Clasa c;
-//		c.pointer = new char[strlen("default") + 1];
-//		strcpy(c.pointer, "default");
-//		return c;
+//	friend void functiePrietena(Clasa& c) {
+//		cout << c.atribut << " - " << c.pointer << endl;
 //	}
 //
+//	friend class Telefon;
 //
 //};
 //
+//
+//class Telefon {
+//	Clasa obiect;
+//
+//	void metoda() {
+//		obiect.atribut = 78;
+//	}
+//};
+//
+//
 //void main() {
-//	Clasa c1;
+//	/*Clasa c1;
 //	c1.pointer = new char[strlen("text") + 1];
 //	strcpy(c1.pointer, "text");
 //	c1.atribut = 10;
 //
-//
 //	Clasa c2 = c1;
+//	Clasa c3(c1);
 //	strcpy(c2.pointer, "newT");
-//
-//	Clasa c3;
-//	c3 = c1;
-//
 //	cout << c1.pointer;
 //
+//	int g;
+//	g = 0;*/
+//	//c3=c2 = c1;
+//
+//	//c1 = c1;
+//	//cout << c1.pointer << endl;
+//
+//	//c3=void
 //	//Clasa c1;
 //	//c1.pointer = new char[strlen("text") + 1];
 //	//strcpy(c1.pointer, "text");
@@ -68,7 +94,10 @@
 //	//Clasa c2;
 //	//c2 = c1;
 //
-//	c1.metoda(c2);
+//	//c1.metoda(c2);
 //
-//	c1.metoda2();
+//	//c2=c1.metoda2();
+//
+//	Clasa c1;
+//	functiePrietena(c1);
 //}

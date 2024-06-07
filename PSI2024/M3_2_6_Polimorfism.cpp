@@ -19,6 +19,6 @@
 //
 //	cout << suma(1, 2)<<endl;
 //	cout << suma(1, 2, 3) << endl;
-//	cout << suma(1.6f, 2.6f)<<endl;
+//	cout << suma(1.6f, 2.0f)<<endl;
 //
 //}

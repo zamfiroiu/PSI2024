@@ -3,12 +3,13 @@
 //
 //using namespace std;
 //
-//class Interfata {
+//class Interfata{
+//public:
 //	virtual string vorbeste() = 0;
 //	virtual string ceMananca() = 0;
 //};
 //
-//class Animal {
+//class Animal: public Interfata {
 //private:
 //	int nrPicioare;
 //	float greutate;
@@ -36,8 +37,6 @@
 //
 //	}
 //
-//	virtual string vorbeste() = 0;
-//	virtual string ceMananca() = 0;
 //};
 //
 //class Caine :public Animal {
@@ -81,7 +80,7 @@
 //
 //
 //void main() {
-//	Animal* pet=new Pisica();
+//	Animal* pet=new Caine();
 //	cout << pet->ceMananca();
 //	cout << pet->vorbeste();
 //
